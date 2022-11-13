@@ -1,0 +1,59 @@
+name: CMake
+
+on:
+  push:
+    branches: [ "dev/testing" ]
+  pull_request:
+    branches: [ "dev/testing" ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Create dir
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+#       -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: mkdir ${{github.workspace}}/build
+    - name: Create cmake
+      working-directory: ${{github.workspace}}/build
+      run: |
+        cmake .. -DTEST=1
+        cmake --build .  
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C
+  valgrind:
+    needs: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: create folder
+      run: mkdir ${{github.workspace}}/build
+    - name: Create cmake
+      working-directory: ${{github.workspace}}/build
+      run: |
+        cmake .. 
+        cmake --build ${{github.workspace}}/build
+    - name: Valgrind install
+      run: sudo apt-get install valgrind
+      
+    - name: Valgrind check
+      working-directory: ${{github.workspace}}/build
+      run: valgrind --tool=memcheck --leak-check=yes --error-exitcode=1 ./DZ2_project
