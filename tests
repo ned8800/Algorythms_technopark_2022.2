@@ -1,0 +1,34 @@
+stdin
++ hello
++ bye
+? bye
++ bye
+- bye
+? bye
+? hello
+
+stdout
+OK
+OK
+OK
+FAIL
+OK
+FAIL
+OK
+
+
+stdin // первые 3 с одинаковым хешем
++ 2
++ 15
++ 20
++ 6
++ 0
++ 1
+
+stdout
+OK
+OK
+OK
+OK
+OK
+// и расширение хеша до 17
