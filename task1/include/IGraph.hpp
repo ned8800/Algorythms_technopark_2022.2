@@ -4,6 +4,7 @@
 #include <vector>
 
 struct IGraph {
+    public:
     virtual ~IGraph() = default;
 
     // Добавление ребра от from к to.
