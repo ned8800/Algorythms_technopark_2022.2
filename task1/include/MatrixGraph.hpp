@@ -6,7 +6,7 @@
 
 struct MatrixGraph : public IGraph {
 public:
-    explicit MatrixGraph(int size);
+    explicit MatrixGraph(int _verticesCount);
 
     explicit MatrixGraph(const IGraph &graph);
 
@@ -21,7 +21,8 @@ public:
     std::vector<int> GetPrevVertices(int vertex) const override;
 
 private:
-    std::vector<std::vector<bool>> adjMatrix;
+    std::vector<std::vector<bool>> matrixGraph;
+    int verticesCount;
 };
 
 #endif  // GRAPH_INCLUDE_MATRIXGRAPH_H_

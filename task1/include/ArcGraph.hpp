@@ -6,7 +6,7 @@
 
 class ArcGraph : public IGraph {
 public:
-    explicit ArcGraph(int size);
+    explicit ArcGraph(int _verticesCount);
 
     explicit ArcGraph(const IGraph &graph);
     

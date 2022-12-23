@@ -7,7 +7,7 @@
 
 class SetGraph : public IGraph {
 public:
-    explicit SetGraph(int size);
+    explicit SetGraph(int _verticesCount);
 
     explicit SetGraph(const IGraph &graph);
 
@@ -22,7 +22,8 @@ public:
     std::vector<int> GetPrevVertices(int vertex) const override;
 
 private:
-    std::vector<std::unordered_set<int>> adjSets;
+    std::vector<std::unordered_set<int>> setGraph;
+    int verticesCount;
 };
 
 #endif //GRAPH_SRC_SETGRAPH_H_

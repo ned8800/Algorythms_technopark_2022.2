@@ -4,7 +4,7 @@
 #include "ListGraph.hpp"
 #include "MatrixGraph.hpp"
 #include "SetGraph.hpp"
-#include "graphFunctions.hpp"
+#include "BFS_and_DFS.hpp"
 
 int main() {
     ArcGraph arcGraph(7);
@@ -15,58 +15,79 @@ int main() {
     arcGraph.AddEdge(2, 5);
     arcGraph.AddEdge(2, 6);
 
-    std::cout << "===ArcGraph===\n"
-                 "Вершин: " << arcGraph.VerticesCount() << "\n"
+    std::cout << std::endl << " arcGraph " << std::endl <<
+                 "Вершин: " << arcGraph.VerticesCount() << std::endl <<
                  "Обход в глубину: ";
-    DFS(arcGraph, 0);
-    std::cout << "Обход в ширину: ";
-    BFS(arcGraph, 0);
+    DFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << "|  Обход в ширину: ";
+    BFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << std::endl;
     
-
 
 
     ListGraph listGraph(arcGraph);
 
-    std::cout << "\n===ListGraph===\n"
-                 "Вершин: " << listGraph.VerticesCount() << "\n"
+    std::cout << std::endl << " listGraph " << std::endl <<
+                 "Вершин: " << listGraph.VerticesCount() << std::endl <<
                  "Обход в глубину: ";
-    DFS(listGraph, 0);
-    std::cout << "Обход в ширину: ";
-    BFS(listGraph, 0);
+    DFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << "|  Обход в ширину: ";
+    BFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << std::endl;
 
 
 
 
     MatrixGraph matrixGraph(listGraph);
 
-    std::cout << "\n===MatrixGraph===\n"
-                 "Вершин: " << matrixGraph.VerticesCount() << "\n"
+    std::cout << std::endl << " matrixGraph " << std::endl <<
+                 "Вершин: " << matrixGraph.VerticesCount() << std::endl <<
                  "Обход в глубину: ";
-    DFS(matrixGraph, 0);
-    std::cout << "Обход в ширину: ";
-    BFS(matrixGraph, 0);
+    DFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << "|  Обход в ширину: ";
+    BFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << std::endl;
 
 
 
 
     SetGraph setGraph(matrixGraph);
 
-    std::cout << "\n===SetGraph===\n"
-                 "Вершин: " << setGraph.VerticesCount() << "\n"
+    std::cout << std::endl << " setGraph " << std::endl <<
+                 "Вершин: " << setGraph.VerticesCount() << std::endl <<
                  "Обход в глубину: ";
-    DFS(setGraph, 0);
-    std::cout << "Обход в ширину: ";
-    BFS(setGraph, 0);
-
-
-
+    DFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << "|  Обход в ширину: ";
+    BFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << std::endl;
 
     SetGraph arcGraphAgain(setGraph);
 
-    std::cout << "\n===ArcGraph Again===\n"
-                 "Вершин: " << arcGraphAgain.VerticesCount() << "\n"
+    std::cout << std::endl << " Again ArcGraph " << std::endl <<
+                 "Вершин: " << arcGraphAgain.VerticesCount() << std::endl <<
                  "Обход в глубину: ";
-    DFS(arcGraphAgain, 0);
-    std::cout << "Обход в ширину: ";
-    BFS(arcGraphAgain, 0);
+    DFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << "|  Обход в ширину: ";
+    BFS(arcGraph, [](int v) {
+        std::cout << v << " ";
+    });
+    std::cout << std::endl;
 }
