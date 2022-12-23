@@ -98,6 +98,7 @@ public:
         if (table[hash1] == key) {
             return false;
         }
+        
         for (int i = 1; i != table.size(); ++i) {
             int probeIndex = (hash1 + (i % table.size())) % table.size();
             if (table[probeIndex] == key) {
